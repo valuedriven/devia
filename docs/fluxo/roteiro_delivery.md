@@ -9,7 +9,7 @@
 - Selecione os três pontos (...).
 - Selecione a opção "Customizations".
 - Na seção Rule, acione o comando +Workspace.
-- Para Enter rule name, informe "terminal-governance" (sem aspas).
+- Para Enter rule name, informe "terminal-execution" (sem aspas).
 - Pressione enter.
 - Para Activation Mode, mantenha a opção Always On.
 - Para Content, cole o conteúdo a seguir:
@@ -140,7 +140,11 @@ Diretórios para Exclusão:
 **Obtenção de credenciais**
 
 - Crie o arquivo .env.local no diretório raiz do projeto.
-- Crie ou atualize o arquivo .gitignore e inclua nele o arquivo .env.local.
+- Crie ou atualize o arquivo .gitignore e inclua nele o seguinte conteúdo:
+  
+```
+.env.local
+```
 - Acesse os endereços informados junto a cada credencia.
 - Navegue em cada aplicação e obtenha os valores solicitados.
 
