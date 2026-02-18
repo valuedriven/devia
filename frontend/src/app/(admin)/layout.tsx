@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
-import { LayoutDashboard, Package, Users, ShoppingBag, LogOut } from "lucide-react";
+import { LayoutDashboard, Package, Users, ShoppingBag, LogOut, Tags } from "lucide-react";
 
 export default function AdminLayout({
     children,
@@ -26,6 +26,12 @@ export default function AdminLayout({
                         <Button variant="ghost" className="w-full justify-start text-slate-300 hover:text-white hover:bg-slate-800">
                             <Package className="mr-2 h-4 w-4" />
                             Produtos
+                        </Button>
+                    </Link>
+                    <Link href="/admin/categories">
+                        <Button variant="ghost" className="w-full justify-start text-slate-300 hover:text-white hover:bg-slate-800">
+                            <Tags className="mr-2 h-4 w-4" />
+                            Categorias
                         </Button>
                     </Link>
                     <Link href="/admin/customers">

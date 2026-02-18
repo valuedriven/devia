@@ -17,6 +17,75 @@ export async function getCategories(): Promise<Category[]> {
     })) as Category[];
 }
 
+export async function getCategory(id: string): Promise<Category | null> {
+    const { data, error } = await supabase
+        .from('categories')
+        .select('*')
+        .eq('id', id)
+        .single();
+
+    if (error) {
+        console.error('Error fetching category:', error);
+        return null;
+    }
+
+    return {
+        ...data,
+        id: String(data.id)
+    } as Category;
+}
+
+export async function createCategory(category: Omit<Category, 'id'>): Promise<Category | null> {
+    const { data, error } = await supabase
+        .from('categories')
+        .insert([category])
+        .select()
+        .single();
+
+    if (error) {
+        console.error('Error creating category:', error);
+        return null;
+    }
+
+    return {
+        ...data,
+        id: String(data.id)
+    } as Category;
+}
+
+export async function updateCategory(id: string, category: Partial<Omit<Category, 'id'>>): Promise<Category | null> {
+    const { data, error } = await supabase
+        .from('categories')
+        .update(category)
+        .eq('id', id)
+        .select()
+        .single();
+
+    if (error) {
+        console.error('Error updating category:', error);
+        return null;
+    }
+
+    return {
+        ...data,
+        id: String(data.id)
+    } as Category;
+}
+
+export async function deleteCategory(id: string): Promise<boolean> {
+    const { error } = await supabase
+        .from('categories')
+        .delete()
+        .eq('id', id);
+
+    if (error) {
+        console.error('Error deleting category:', error);
+        return false;
+    }
+
+    return true;
+}
+
 export async function getProducts(): Promise<Product[]> {
     const { data, error } = await supabase
         .from('products')

@@ -42,7 +42,7 @@ export default async function AdminProductsPage() {
                                 {products.map((product) => (
                                     <tr key={product.id} className="border-b transition-colors hover:bg-muted/50">
                                         <td className="p-4 align-middle font-medium flex items-center gap-3">
-                                            <div className="h-10 w-10 rounded bg-muted overflow-hidden">
+                                            <div className="h-10 w-10 flex-shrink-0 rounded bg-muted overflow-hidden">
                                                 {/* eslint-disable-next-line @next/next/no-img-element */}
                                                 <img src={product.image} alt={product.name} className="h-full w-full object-cover" />
                                             </div>
