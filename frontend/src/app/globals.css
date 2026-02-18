@@ -291,7 +291,7 @@ h6 {
 }
 
 .min-w-0 {
-  min-w-0: 0;
+  min-width: 0;
 }
 
 /* Special class for flex containers to allow shrinking below content size */
@@ -1151,4 +1151,186 @@ a.btn-primary {
   align-items: center;
   gap: 1rem;
   margin-top: 1.5rem;
+}
+
+/* Admin Panel Utility Classes (Substitutes for Tailwind) */
+.w-64 {
+  width: 16rem;
+}
+
+.ml-64 {
+  margin-left: 16rem;
+}
+
+.h-16 {
+  height: 4rem;
+}
+
+.h-4 {
+  height: 1rem;
+}
+
+.w-4 {
+  width: 1rem;
+}
+
+.mr-2 {
+  margin-right: 0.5rem;
+}
+
+.mr-4 {
+  margin-right: 1rem;
+}
+
+.fixed {
+  position: fixed;
+}
+
+.inset-y-0 {
+  top: 0;
+  bottom: 0;
+}
+
+.sticky {
+  position: sticky;
+}
+
+.top-0 {
+  top: 0;
+}
+
+.z-10 {
+  z-index: 10;
+}
+
+.bg-slate-900 {
+  background-color: #0f172a;
+}
+
+.bg-slate-800 {
+  background-color: #1e293b;
+}
+
+.bg-slate-50 {
+  background-color: #f8fafc;
+}
+
+.bg-white {
+  background-color: #ffffff;
+}
+
+.text-slate-50 {
+  color: #f8fafc;
+}
+
+.text-slate-300 {
+  color: #cbd5e1;
+}
+
+.text-white {
+  color: #ffffff;
+}
+
+.text-red-400 {
+  color: #f87171;
+}
+
+.text-red-300 {
+  color: #fca5a5;
+}
+
+.text-muted-foreground {
+  color: hsl(var(--muted-foreground));
+}
+
+.hover\:bg-slate-800:hover {
+  background-color: #1e293b;
+}
+
+.hover\:text-white:hover {
+  color: #ffffff;
+}
+
+.hover\:text-red-300:hover {
+  color: #fca5a5;
+}
+
+.hover\:bg-red-900\/20:hover {
+  background-color: rgba(127, 29, 29, 0.2);
+}
+
+.px-6 {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.px-8 {
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+.p-8 {
+  padding: 2rem;
+}
+
+.pb-2 {
+  padding-bottom: 0.5rem;
+}
+
+.border-b {
+  border-bottom-width: 1px;
+}
+
+.border-t {
+  border-top-width: 1px;
+}
+
+.border-slate-800 {
+  border-color: #1e293b;
+}
+
+.space-y-0>*+* {
+  margin-top: 0;
+}
+
+.space-y-2>*+* {
+  margin-top: 0.5rem;
+}
+
+.space-y-8>*+* {
+  margin-top: 2rem;
+}
+
+.justify-start {
+  justify-content: flex-start;
+}
+
+.font-semibold {
+  font-weight: 600;
+}
+
+.grid {
+  display: grid;
+}
+
+.relative {
+  position: relative;
+}
+
+.overflow-auto {
+  overflow: auto;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+@media (min-width: 768px) {
+  .md\:grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 }

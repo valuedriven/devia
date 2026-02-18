@@ -63,6 +63,9 @@ export function Header() {
                         </SignInButton>
                     </SignedOut>
                     <SignedIn>
+                        <Link href="/admin" className="text-sm font-medium mr-4 hover:text-primary transition-colors">
+                            Admin
+                        </Link>
                         <UserButton />
                     </SignedIn>
                 </div>
