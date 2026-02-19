@@ -291,9 +291,10 @@ Use o mcp server do Vercel para listar os times e projetos
 - Solicite a criação de um projeto (troque o <nome do projeto> pelo nome do projeto criado no Stitch e garanta que o @ se refira aos arquivos do projeto):
 
 ```
-# Prompt para IDE Agent (Antigravity)
+# Criação de projeto web
 
 ## Objetivo
+
 Criar um projeto **web frontend** seguindo estritamente as definições fornecidas.
 
 ## Diretrizes Obrigatórias
@@ -305,18 +306,19 @@ Criar um projeto **web frontend** seguindo estritamente as definições fornecid
 - Seguir integralmente os documentos:
   - `@docs/spec_ui.md`
   - `@docs/spec_tech.md`
+  - `@docs/design_system.md`
 
 - Utilizar as imagens disponíveis no projeto Stitch:
   - `<nome do projeto>`
 
 ## Restrições
 
+- Criar estrutura de monorepo preparada para futura integração com backend
 - Armazenar todos os arquivos no diretório `/frontend`
 - Armazenar todo o código-fonte no diretório `/frontend/src`
 - Não criar projeto backend
 - Não configurar integrações externas
-- Executar inicialmente apenas local
-- Criar estrutura preparada para futura integração com backend
+- Executar inicialmente apenas localmente
 ```
 
 - Execute o plano e monitore o progresso até a conclusão.
