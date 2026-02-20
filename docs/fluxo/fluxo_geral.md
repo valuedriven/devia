@@ -24,15 +24,6 @@ Os objetivos são:
 - Consistência entre requisitos, design e implementação,
 - Uso eficiente de modelos de IA como copilotos de desenvolvimento.
 
-Pré-requisitos:
-- Google Antigravity <https://antigravity.google> instalado localmente.
-- Node.js <https://nodejs.org/> instalado localmente.
-- Git <https://git-scm.com/> instalado localmente.
-- Conta GitHub <https://github.com/>.
-- Conta Vercel <https://vercel.com/>.
-- Conta Supabase <https://www.supabase.com/>.
-- Conta Clerk <https://clerk.com/>.
-
 Diretrizes gerais:
 - Usar saída de cada atividade como contexto para atividade seguinte.
 - Usar one shot injection.

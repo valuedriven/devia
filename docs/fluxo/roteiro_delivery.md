@@ -1,5 +1,35 @@
 # Roteiro de Delivery
 
+## Pré-requisitos
+
+- Google Antigravity <https://antigravity.google> instalado localmente.
+- Node.js <https://nodejs.org/> instalado localmente.
+- Git <https://git-scm.com/> instalado localmente.
+- Conta GitHub <https://github.com/>.
+- Conta Vercel <https://vercel.com/>.
+- Conta Supabase <https://www.supabase.com/>.
+- Conta Clerk <https://clerk.com/>.
+
+Certifique-se de estar logado nessses serviços ao realizar o roteiro.
+
+## Orientações gerais
+
+### Gerenciamento da janela de contexto
+
+- Priorize a criação de novas conversa no Antigravity para cada tarefa. Para tanto, acesse o painel Agent, comando +, Start a New Conversation.
+
+### Ciclo Planejar/Executar (Research/Plan/Implement)
+
+- Priorize a estruturação das tarefas no ciclo Planejar/Executar:
+  - Planejar: No campo Conversation mode, selecione a opção "Planning". Para o campo Model, priorize, sempre que disponíveis, modelos com maior capacidade de reasoning ou "thinking". Após o término do planejamento, abra e analise o Implementation plan criado.
+  - Executar: No campo Conversation mode, selecione a opção "Fast" (execução). Para o campo Model, podem ser selecionados modelos mais rápidos ou simples.
+   
+### Ajuste nos prompts
+
+- Para vários exemplos de prompts disponibilizados, atente para a necessidade de substituir os valores entre os símbolos "<" e ">" pelos valores específicos de seu projeto.
+- Quando estiver editando um prompt, utilize o caracter "@" para referenciar recursos como arquivos, diretórios, rules e mcp servers.
+
+
 ## 2.1 Desenvolvimento
 
 **Visão geral**
@@ -14,9 +44,6 @@ Participantes:
 
 Ferramentas:
 - Ambientes de desenvolvimento (Google Antigravity, Claude Code, etc.)
-
-Considerações:
-- Usar deepresearch
 
 ---
 
@@ -125,19 +152,18 @@ Transparente sempre.
 - Cole o texto a seguir no prompt, solicitando a instalação das skills:
 
 ```
-Instale localmente e em um diretório separado padrão esperado pelo antigravity as skills dos repositórios e endereços listados abaixo.
+No diretório padrão do Antigravity (.agent/skills) instale as skills dos repositórios e endereços listados abaixo.
 
-Nota de Performance: Para os endereços sob o domínio antigravity.codes e caminhos diretos de arquivos, utilize o modo de importação de conteúdo para evitar a varredura completa de diretórios, reduzindo o tempo de processamento.
+Nota de Performance: Para os endereços com caminhos diretos de arquivos, utilize o modo de importação de conteúdo para evitar a varredura completa de diretórios, reduzindo o tempo de processamento.
 
 1. Repositórios de Skills (GitHub):
 https://github.com/google-labs-code/stitch-skills
 https://github.com/vercel-labs/agent-skills
+https://github.com/vercel-labs/next-skills
 https://github.com/supabase/agent-skills
 https://github.com/clerk/skills
+https://playbooks.com/skills/markpitt/claude-skills/github-api
 
-2. Skills de Conteúdo Direto (Non-Repo):
-https://antigravity.codes/agent-skills/nextjs/nextjs
-https://antigravity.codes/agent-skills/architecture/design-system-patterns
 
 Manutenção do Ambiente
 Remova, de forma local e global, todos os diretórios de agentes que não são utilizados nativamente pelo antigravity.
@@ -146,6 +172,7 @@ Diretórios para Exclusão:
 .agents/
 .cursor/
 ```
+
 - Ao lado do item implementation_plan.md, acione o comando Open.
 - Na seção de prompt, alterne da opção "Planning" para "Fast" (execução).
 - Repita esse procedimento sempre que for executar um plano.
@@ -162,7 +189,7 @@ Diretórios para Exclusão:
 
 **Obtenção de credenciais**
 
-- Crie o arquivo .env.local no diretório raiz do projeto.
+- No diretório raiz do projeto crie o arquivo .env.local (atente para o ponto no início do nome do arquivo)
 - Crie ou atualize o arquivo .gitignore e inclua nele o seguinte conteúdo:
   
 ```
@@ -288,7 +315,9 @@ Use o mcp server do Vercel para listar os times e projetos
 ### 2.1.2 Criação do projeto web
 
 - No painel Agent, selecione a opção Start a new conversation.
-- Solicite a criação de um projeto (troque o <nome do projeto> pelo nome do projeto criado no Stitch e garanta que o @ se refira aos arquivos do projeto):
+- Copie o conteúdo a seguir e proceda os seguintes ajustes antes de comandar a execução:
+  - Troque o <nome do projeto> pelo nome do projeto criado no Stitch
+  - Troque os nomes dos arquivos por referências aos objetos, usando o caracter "@".
 
 ```
 # Criação de projeto web
@@ -300,16 +329,16 @@ Criar um projeto **web frontend** seguindo estritamente as definições fornecid
 ## Diretrizes Obrigatórias
 
 - Utilizar as skills:
-  - `nextjs`
-  - `design-systems`
+  - nextjs
+  - design-systems
 
 - Seguir integralmente os documentos:
-  - `@docs/spec_ui.md`
-  - `@docs/spec_tech.md`
-  - `@docs/design_system.md`
+  - <@docs/spec_ui.md>
+  - <@docs/spec_tech.md>
+  - <@docs/design_system.md>
 
 - Utilizar as imagens disponíveis no projeto Stitch:
-  - `<nome do projeto>`
+  - <nome do projeto>
 
 ## Restrições
 
@@ -337,8 +366,11 @@ Atualize o arquivo README.md utilizando as boas práticas recomendadas pelo GitH
 
 ```
 Crie o arquivo AGENTS.md para o projeto usando como contexto apenas as seguintes informações:
-- documentos docs/prd.md docs/spec_ui.md e docs/spec_tech.md
-- diretório frontend.
+- documentos:
+ - <@docs/prd.md>
+ - <@docs/spec_ui.md>
+ - <@docs/spec_tech.md>
+- diretório <@frontend>.
 Use referências relativas para os arquivos citados.
 ```
 
@@ -383,7 +415,7 @@ Ferramentas:
 - Solicite a criação do projeto Vercel (substitua <nome do time> pelo valor correspondente configurado no vercel):
 
 ```
-Use a skill vercel (.agent/skills/vercel),  crie um projeto e faça o deploy da aplicação. Utilize o time <nome do time>
+Use a skill vercel (.agent/skills/vercel) para criar um projeto e fazer o deploy da aplicação. Utilize o time <nome do time>
 ```
 
 - Caso tenha ocorrido algum erro, copie a mensagem de erro e cole no chat do agente para correção.
