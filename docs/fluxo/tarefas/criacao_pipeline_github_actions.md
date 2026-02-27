@@ -119,10 +119,10 @@ Crie um arquivo de workflow do GitHub Actions (`.github/workflows/deploy.yml`) p
 - Verifique o arquivo deploy.yml com o conteúdo gerado pelo Antigravity.
 - Verifique se o arquivo foi criado com sucesso.
 - Obtenha as secrets do vercel:
-  - VERCEL_TOKEN no endereço: https://vercel.com/settings/tokens
-  - VERCEL_ORG_ID no endereço: https://vercel.com/<team>/~/settings, <team> é o nome da sua equipe.
-  - VERCEL_PROJECT_ID no endereço: https://vercel.com/<team>/<project>/settings, campo Project ID.
-- Configure as secrets no repositório do GitHub, no endereço: https://github.com/<usuário>/<projeto>/settings/secrets/actions.
+  - VERCEL_TOKEN no endereço: <https://vercel.com/account/settings/tokens>
+  - VERCEL_ORG_ID no endereço: <https://vercel.com/[team]/~/settings>, [team] é o nome da sua equipe.
+  - VERCEL_PROJECT_ID no endereço: <https://vercel.com/[team]/[project]/settings>, campo Project ID.
+- Configure as secrets no repositório do GitHub, no endereço: <https://github.com/[usuário]/[projeto]/settings/secrets/actions>.
 - Verifique se as secrets foram configuradas com sucesso.
 
 
