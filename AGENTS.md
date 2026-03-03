@@ -24,101 +24,18 @@ Plataforma de e-commerce para microempreendedores: vitrine digital para clientes
 
 ---
 
-## Estrutura do Frontend
+## Persona do agente de Backend
+- **Objetivo:** Construir aplicações escaláveis, modulares e testáveis com NestJS.
+- **Lógica de decisão:** Priorize as restrições definidas em `docs/prd.md`, `docs/spec_tech.md` e `docs/spec_ui.md` sobre os padrões padrão.
+- **Consciência de referência:** Verifique se uma biblioteca compartilhada existe em `libs/` antes de criar uma nova utilidade em `backend`.
 
-```
-frontend/src/
-├── app/
-│   ├── (admin)/          # categories, customers, dashboard, orders, products
-│   ├── (auth)/           # login
-│   └── (shop)/           # cart, orders
-├── components/
-│   ├── ui/               # Badge, Button, Card, etc. (reutilizáveis)
-│   ├── layout/           # Header, Sidebar, Footer
-│   └── admin/            # componentes do painel admin
-└── lib/
-    ├── mock-data.ts       # dados mock para desenvolvimento
-    └── utils.ts
-```
+## Contexto de Entrada 
+- Quando uma alteração é solicitada, verifique `docs/prd.md` para garantir alinhamento com o negócio.
+- Sempre faça referência cruzada `docs/spec_tech.md` e `docs/spec_ui.md` para consistência do esquema de banco de dados.
 
----
-
-## Regras de Negócio Críticas
-
-### Autenticação e Acesso
-- Cliente: pode navegar e montar carrinho **sem login**; precisa estar **logado para confirmar pedido**
-- Admin: **sempre autenticado** para qualquer ação
-
-### Produtos
-- Produtos inativos → não aparecem na vitrine
-- Produtos sem estoque → aparecem desabilitados (não removidos)
-
-### Clientes
-- Clientes com pedidos → não podem ser excluídos, apenas **desativados**
-
-### Pedidos
-- Mínimo 1 produto para confirmar pedido
-- Recalcular total ao alterar quantidade
-- Pagamento é **manual** (admin registra); sem integração com gateway no MVP
-
-### Transições de Status dos Pedidos
-```
-Novo → Pago → Preparação → Faturado → Despachado → Entregue
-Novo → Cancelado
-Qualquer estado (exceto Entregue e Cancelado) → Cancelado
-```
-
-### Badges de Status
-
-| Status     | Tone    |
-|------------|---------|
-| Novo       | neutral |
-| Pago       | success |
-| Preparação | info    |
-| Faturado   | info    |
-| Despachado | info    |
-| Entregue   | success |
-| Cancelado  | error   |
-
----
-
-## Padrões de Código
-
-- **Arquitetura**: SOLID + Clean Architecture
-- **NestJS**: controllers → services → repositories, com DTOs, guards, interceptors
-- **Frontend**: componentes modulares, tokens semânticos, validação em tempo real, confirmação antes de ações destrutivas
-- **Acessibilidade**: navegação por teclado, estados de loading e vazio em todas as listagens
-- **APIs**: RESTful, versionadas via URI (`/v1/resource`), autenticação Bearer JWT
-- **Transações**: obrigatórias em operações multi-tabela
-- **Auditoria**: todas as tabelas devem ter `created_at` e `updated_at`
-
----
-
-## Escopo do MVP
-
-**Incluído:**
-- Vitrine de produtos funcional
-- Fluxo de pedidos completo
-- Autenticação com Clerk
-- Integração com Supabase
-- Painel administrativo básico
-
-**Fora do MVP (não implementar agora):**
-- Upload de imagens (usar URL)
-- Gateway de pagamento
-- Multi-tenancy
-- Testes automatizados (preparar arquitetura)
-- Observabilidade avançada
-
----
-
-## Domínios
-
-**Entidades:** Categoria, Produto, Cliente, Pedido, Item de Pedido
-
-**Status do Pedido:** Novo, Pago, Preparação, Faturado, Despachado, Entregue, Cancelado
-
-**Métodos de Pagamento:** Cartão de Crédito, Cartão de Débito, Pix, Dinheiro
+## Requisitos de saída
+- Forneça testes unitários (Jest) para cada novo serviço gerado.
+- Seguir a estrutura de pastas: src/modules/[module-name]/{controllers, services, dto, entities}.
 
 ---
 
@@ -127,3 +44,9 @@ Qualquer estado (exceto Entregue e Cancelado) → Cancelado
 - `docs/prd.md` — Requisitos e critérios de aceitação
 - `docs/spec_tech.md` — Arquitetura detalhada
 - `docs/spec_ui.md` — Interfaces e fluxos de navegação
+
+## Documentação não disponível
+
+- Pastas que não devem ser lidas: 
+  - `docs/fluxo`
+  - `docs/diagramas`
