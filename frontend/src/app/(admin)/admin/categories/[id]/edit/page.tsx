@@ -6,13 +6,14 @@ import { getCategory } from "@/lib/data";
 import { notFound } from "next/navigation";
 
 interface EditCategoryPageProps {
-    params: {
+    params: Promise<{
         id: string;
-    };
+    }>;
 }
 
 export default async function EditCategoryPage({ params }: EditCategoryPageProps) {
-    const category = await getCategory(params.id);
+    const { id } = await params;
+    const category = await getCategory(id);
 
     if (!category) {
         notFound();

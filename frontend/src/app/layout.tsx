@@ -4,6 +4,7 @@ import { ptBR } from "@clerk/localizations";
 import { Inter, Outfit } from "next/font/google";
 import { CartProvider } from "@/lib/CartContext";
 import { UserSync } from "@/components/auth/UserSync";
+import { DesktopSidebar } from "@/components/layout/DesktopSidebar";
 import "./globals.css";
 
 const inter = Inter({
@@ -33,7 +34,12 @@ export default function RootLayout({
       <UserSync />
       <CartProvider>
         <html lang="pt-BR" className={`${inter.variable} ${outfit.variable}`}>
-          <body className="font-sans min-h-screen flex flex-col">{children}</body>
+          <body className="font-sans min-h-screen flex">
+            <DesktopSidebar />
+            <div className="flex-1 flex flex-col min-h-screen min-w-0 lg:ml-64">
+              {children}
+            </div>
+          </body>
         </html>
       </CartProvider>
     </ClerkProvider>

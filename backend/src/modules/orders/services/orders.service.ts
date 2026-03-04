@@ -31,9 +31,16 @@ export class OrdersService {
         });
     }
 
-    async findAll(tenantId: string) {
+    async findAll(tenantId: string, customerEmail?: string) {
+        const where: any = { tenantId };
+        if (customerEmail) {
+            where.customers = {
+                email: customerEmail
+            };
+        }
+
         return this.prisma.orders.findMany({
-            where: { tenantId },
+            where,
             include: {
                 customers: true,
                 order_items: true,

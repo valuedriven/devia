@@ -209,20 +209,7 @@ export async function getCustomer(id: string): Promise<Customer | null> {
     }
 }
 
-export async function getCustomerByClerkId(clerkId: string): Promise<Customer | null> {
-    try {
-        const data = await fetchApi<any>(`/customers/clerk/${clerkId}`);
-        if (!data) return null;
 
-        return {
-            ...data,
-            id: String(data.id)
-        } as Customer;
-    } catch (error) {
-        console.error('Error fetching customer by clerk ID:', error);
-        return null;
-    }
-}
 
 export async function createCustomer(customer: Omit<Customer, 'id' | 'created_at' | 'updated_at'> & { clerkId?: string }): Promise<Customer | null> {
     try {
@@ -301,9 +288,12 @@ export async function syncCustomerApi(user: { email: string; name: string }): Pr
 }
 
 
-export async function getOrders(): Promise<Order[]> {
+export async function getOrders(customerEmail?: string): Promise<Order[]> {
     try {
-        const orders = await fetchApi<any[]>('/orders');
+        const url = customerEmail
+            ? `/orders?customerEmail=${encodeURIComponent(customerEmail)}`
+            : '/orders';
+        const orders = await fetchApi<any[]>(url);
 
         return orders.map(o => ({
             ...o,

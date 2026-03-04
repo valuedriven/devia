@@ -5,8 +5,9 @@ import { Button, buttonVariants } from "@/components/ui/Button";
 import { getCustomer } from "@/lib/data";
 import { notFound } from "next/navigation";
 
-export default async function EditCustomerPage({ params }: { params: { id: string } }) {
-    const customer = await getCustomer(params.id);
+export default async function EditCustomerPage({ params }: { params: Promise<{ id: string }> }) {
+    const { id } = await params;
+    const customer = await getCustomer(id);
 
     if (!customer) {
         notFound();

@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useUser, SignInButton } from "@clerk/nextjs";
 import { useCart } from "@/lib/CartContext";
-import { createOrder, getCustomerByClerkId } from "@/lib/data";
+import { createOrder, syncCustomerApi } from "@/lib/data";
 import { Button } from "@/components/ui/Button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/Card";
 import { Trash2, CheckCircle, LogIn } from "lucide-react";
@@ -34,9 +34,14 @@ export default function CartPage() {
         try {
             let customerId = undefined;
             if (user?.id) {
-                const customer = await getCustomerByClerkId(user.id);
-                if (customer?.id) {
-                    customerId = Number(customer.id);
+                const email = user.primaryEmailAddress?.emailAddress;
+                const name = user.fullName || email || "Cliente";
+
+                if (email) {
+                    const customer = await syncCustomerApi({ email, name });
+                    if (customer?.id) {
+                        customerId = Number(customer.id);
+                    }
                 }
             }
 
@@ -97,54 +102,58 @@ export default function CartPage() {
         <div className="container py-8">
             <h1 className="text-3xl font-bold mb-8">Carrinho de Compras</h1>
 
-            <div className="grid gap-8 md:grid-cols-3">
+            <div className="grid gap-8 md:grid-cols-3 md:items-start">
                 {/* Cart Items List */}
                 <div className="md:col-span-2 space-y-4">
                     {cartItems.map((item) => (
-                        <Card key={item.id} className="flex flex-row items-center p-4 gap-4">
-                            <div className="h-20 w-20 bg-muted rounded overflow-hidden flex-shrink-0">
-                                {/* eslint-disable-next-line @next/next/no-img-element */}
-                                <img src={item.image} alt={item.name} className="h-full w-full object-cover" />
+                        <Card key={item.id} className="flex flex-col sm:flex-row items-start sm:items-center p-4 gap-4">
+                            <div className="flex items-center gap-4 w-full sm:w-auto flex-1 min-w-0">
+                                <div className="h-20 w-20 bg-muted rounded overflow-hidden flex-shrink-0">
+                                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                                    <img src={item.image} alt={item.name} className="h-full w-full object-cover" />
+                                </div>
+                                <div className="flex-1 min-w-0">
+                                    <h3 className="font-semibold truncate text-base sm:text-lg">{item.name}</h3>
+                                    <p className="text-muted-foreground text-sm truncate">
+                                        {formatCurrency(item.price)}
+                                    </p>
+                                </div>
                             </div>
-                            <div className="flex-1 min-w-0">
-                                <h3 className="font-semibold truncate">{item.name}</h3>
-                                <p className="text-muted-foreground text-sm">
-                                    {formatCurrency(item.price)}
-                                </p>
-                            </div>
-                            <div className="flex items-center gap-2">
-                                <Button
-                                    variant="outline"
-                                    size="icon"
-                                    className="h-8 w-8"
-                                    onClick={() => updateQuantity(item.id, -1)}
-                                    disabled={item.quantity <= 1}
-                                >
-                                    -
-                                </Button>
-                                <span className="w-8 text-center">{item.quantity}</span>
-                                <Button
-                                    variant="outline"
-                                    size="icon"
-                                    className="h-8 w-8"
-                                    onClick={() => updateQuantity(item.id, 1)}
-                                >
-                                    +
-                                </Button>
-                            </div>
-                            <div className="font-bold">
-                                {formatCurrency(item.price * item.quantity)}
-                            </div>
-                            <div className="flex-shrink-0">
-                                <Button
-                                    variant="ghost"
-                                    size="icon"
-                                    className="text-destructive"
-                                    onClick={() => removeItem(item.id)}
-                                    aria-label={`Remover ${item.name}`}
-                                >
-                                    <Trash2 className="icon-sm" />
-                                </Button>
+                            <div className="flex items-center gap-3 w-full sm:w-auto justify-between sm:justify-end mt-4 sm:mt-0 border-t sm:border-0 pt-4 sm:pt-0">
+                                <div className="flex items-center gap-2">
+                                    <Button
+                                        variant="outline"
+                                        size="icon"
+                                        className="h-8 w-8"
+                                        onClick={() => updateQuantity(item.id, -1)}
+                                        disabled={item.quantity <= 1}
+                                    >
+                                        -
+                                    </Button>
+                                    <span className="w-8 text-center">{item.quantity}</span>
+                                    <Button
+                                        variant="outline"
+                                        size="icon"
+                                        className="h-8 w-8"
+                                        onClick={() => updateQuantity(item.id, 1)}
+                                    >
+                                        +
+                                    </Button>
+                                </div>
+                                <div className="font-bold min-w-[100px] text-right">
+                                    {formatCurrency(item.price * item.quantity)}
+                                </div>
+                                <div className="flex-shrink-0">
+                                    <Button
+                                        variant="ghost"
+                                        size="icon"
+                                        className="text-destructive h-8 w-8"
+                                        onClick={() => removeItem(item.id)}
+                                        aria-label={`Remover ${item.name}`}
+                                    >
+                                        <Trash2 className="icon-sm" />
+                                    </Button>
+                                </div>
                             </div>
                         </Card>
                     ))}

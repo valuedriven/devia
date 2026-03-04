@@ -25,11 +25,11 @@ export function Header() {
         <header className="header-root">
             <div className="header-container">
                 {/* Logo */}
-                <div className="header-brand">
-                    {/* Mobile Menu Trigger */}
-                    {/* Menu Trigger - Visible on mobile ALWAYS, and on desktop for ADMINS as a 'Lateral Menu' */}
+                {/* Logo and Menu Trigger */}
+                <div className="header-brand hidden-desktop">
+                    {/* Mobile Menu Trigger - Visible only on mobile */}
                     <button
-                        className={`${!isAdmin ? "hidden-desktop" : ""} menu-trigger-btn`}
+                        className="menu-trigger-btn"
                         onClick={() => setIsMenuOpen(true)}
                     >
                         <Menu className="icon-md" />

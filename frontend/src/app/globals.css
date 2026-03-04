@@ -1201,7 +1201,7 @@ a.btn-primary {
   display: none;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .hidden-desktop {
     display: none;
   }
@@ -1283,12 +1283,27 @@ a.btn-primary {
 }
 
 /* Admin Panel Utility Classes (Substitutes for Tailwind) */
+/* Admin Panel Utility Classes (Substitutes for Tailwind) */
 .w-64 {
   width: 16rem;
 }
 
 .ml-64 {
   margin-left: 16rem;
+}
+
+/* Responsive Utilities */
+@media (min-width: 1024px) {
+  .lg\:ml-64 {
+    margin-left: 16rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .md\:px-8 {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
 }
 
 .h-16 {
@@ -1318,6 +1333,98 @@ a.btn-primary {
 .inset-y-0 {
   top: 0;
   bottom: 0;
+}
+
+.sidebar-desktop {
+  width: 16rem;
+  background-color: #ffffff;
+  color: #0f172a;
+  display: none;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 20;
+  border-right: 1px solid #e2e8f0;
+}
+
+@media (min-width: 1024px) {
+  .sidebar-desktop {
+    display: flex;
+  }
+}
+
+.sidebar-header {
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  padding: 0 1.5rem;
+  font-weight: 700;
+  font-size: 1.25rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.sidebar-nav {
+  flex: 1;
+  padding: 1rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.sidebar-section-divider {
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #e2e8f0;
+  margin-bottom: 0.5rem;
+}
+
+.sidebar-section-label {
+  padding: 0 1rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #64748b;
+}
+
+.sidebar-link {
+  width: 100%;
+  justify-content: flex-start;
+  color: #475569;
+  transition: all 0.2s;
+  border-radius: var(--radius);
+  padding: 0.5rem 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.sidebar-link:hover {
+  background-color: #f1f5f9;
+  color: #0f172a;
+}
+
+.sidebar-link.active {
+  background-color: #f1f5f9;
+  color: #4f46e5;
+  font-weight: 600;
+}
+
+.sidebar-footer {
+  padding: 1rem;
+  border-top: 1px solid #e2e8f0;
+}
+
+.sidebar-logout-btn {
+  width: 100%;
+  justify-content: flex-start;
+  color: #ef4444;
+}
+
+.sidebar-logout-btn:hover {
+  background-color: #fef2f2;
+  color: #b91c1c;
 }
 
 .sticky {
@@ -1463,7 +1570,25 @@ a.btn-primary {
 }
 
 @media (min-width: 768px) {
+  .md\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .md\:grid-cols-3 {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
+}
+
+@media (min-width: 1024px) {
+  .lg\:gap-12 {
+    gap: 3rem;
+  }
+}
+
+.aspect-square {
+  aspect-ratio: 1 / 1;
+}
+
+.object-cover {
+  object-fit: cover;
 }

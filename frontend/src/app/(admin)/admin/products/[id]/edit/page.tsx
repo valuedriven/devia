@@ -1,9 +1,25 @@
 import { ProductForm } from "@/components/admin/ProductForm";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
-import { Button, buttonVariants } from "@/components/ui/Button";
+import { buttonVariants } from "@/components/ui/Button";
+import { getProduct, getCategories } from "@/lib/data";
+import { notFound } from "next/navigation";
 
-export default function EditProductPage() {
+interface EditProductPageProps {
+    params: { id: string };
+}
+
+export default async function EditProductPage({ params }: EditProductPageProps) {
+    const { id } = await params;
+    const [product, categories] = await Promise.all([
+        getProduct(id),
+        getCategories()
+    ]);
+
+    if (!product) {
+        notFound();
+    }
+
     return (
         <div className="space-y-6">
             <div className="flex items-center gap-4">
@@ -13,7 +29,7 @@ export default function EditProductPage() {
                 <h1 className="text-3xl font-bold">Editar Produto</h1>
             </div>
 
-            <ProductForm />
+            <ProductForm categories={categories} initialData={product} />
         </div>
     );
 }

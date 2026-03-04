@@ -4,8 +4,17 @@ import { Card, CardContent } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Badge";
 import { getOrders } from "@/lib/data";
 
+import { currentUser } from "@clerk/nextjs/server";
+import { redirect } from "next/navigation";
+
 export default async function OrdersPage() {
-    const orders = await getOrders();
+    const user = await currentUser();
+    if (!user) {
+        redirect("/login");
+    }
+
+    const email = user.primaryEmailAddress?.emailAddress;
+    const orders = await getOrders(email);
     const statusToneMap: Record<string, "neutral" | "success" | "info" | "error" | "warning"> = {
         "Novo": "neutral",
         "Pago": "success",
