@@ -1,0 +1,60 @@
+services:
+  db:
+    image: postgres:15-alpine
+    container_name: devai-db
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: dbname
+    ports:
+      - "5432:5432"
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U user -d dbname" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - devai-network
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: devai-backend
+    env_file:
+      - ./backend/.env.example
+    ports:
+      - "${PORT:-3000}:${PORT:-3000}"
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - devai-network
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        - NEXT_PUBLIC_API_URL=http://backend:${PORT:-3000}
+    container_name: devai-frontend
+    env_file:
+      - ./frontend/.env.example
+    environment:
+      - NEXT_PUBLIC_API_URL=http://backend:${PORT:-3000}
+    ports:
+      - "${PORT:-3001}:${PORT:-3001}"
+    depends_on:
+      - backend
+    networks:
+      - devai-network
+
+volumes:
+  db-data:
+
+
+networks:
+  devai-network:
+    driver: bridge

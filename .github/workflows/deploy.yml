@@ -4,11 +4,10 @@ on:
   push:
     branches:
       - main
-  pull_request:
 
 jobs:
-  quality:
-    name: Qualidade (Lint & Test)
+  quality-backend:
+    name: Qualidade backend (Lint & Test)
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -19,25 +18,53 @@ jobs:
       - name: Instalação do Node.js com Cache
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '24'
           cache: 'npm'
-          cache-dependency-path: frontend/package-lock.json
+          cache-dependency-path: package-lock.json
+
+      - name: Instalar Dependências
+        run: npm ci
+        working-directory: backend
+              
+      - name: Executar Linter
+        run: npm run lint
+        working-directory: backend
+
+      - name: Executar Testes
+        run: npm run test
+        working-directory: backend
+
+  quality-frontend:
+    name: Qualidade frontend (Lint & Test)
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout do Repositório
+        uses: actions/checkout@v4
+
+      - name: Instalação do Node.js com Cache
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: 'npm'
+          #cache-dependency-path: package-lock.json
 
       - name: Instalar Dependências
         run: npm ci
         working-directory: frontend
-
+      
       - name: Executar Linter
         run: npm run lint
         working-directory: frontend
-
+      
       - name: Executar Testes
         run: npm run test
         working-directory: frontend
 
   build-deploy:
     name: Build & Deploy (Vercel)
-    needs: quality
+    needs: [quality-backend, quality-frontend]
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -55,7 +82,7 @@ jobs:
       - name: Instalação do Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '24'
 
       - name: Instalar Vercel CLI
         run: npm install --global vercel@latest
