@@ -2,7 +2,7 @@
 
 > **Plataforma de e-commerce para microempreendedores** — Controle total de pedidos e pagamentos com uma vitrine digital profissional.
 
-[![Next.js](https://img.shields.io/badge/Next.js-15.x-black?logo=next.js)](https://nextjs.org/)
+[![Next.js](https://img.shields.io/badge/Next.js-16.x-black?logo=next.js)](https://nextjs.org/)
 [![NestJS](https://img.shields.io/badge/NestJS-11.x-red?logo=nestjs)](https://nestjs.com/)
 [![React](https://img.shields.io/badge/React-19.x-blue?logo=react)](https://reactjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue?logo=typescript)](https://www.typescriptlang.org/)
@@ -20,9 +20,10 @@
 
 - 🏪 **Vitrine Digital**: Catálogo online intuitivo e otimizado para conversão.
 - 📦 **Gestão de Catálogo**: Controle total de produtos e categorias via painel administrativo.
+- 👥 **Gestão de Clientes**: Cadastro e acompanhamento de base de clientes.
+- 💰 **Controle de Pedidos**: Fluxo completo do carrinho à finalização da venda.
 - 🏢 **Multi-tenancy**: Isolamento de dados robusto entre diferentes lojistas.
-- 💰 **Controle de Pedidos**: Acompanhamento em tempo real, do carrinho à entrega.
-- 🔒 **Segurança Nativa**: Autenticação moderna e controle de acesso granular.
+- 🔒 **Segurança Nativa**: Autenticação moderna via Clerk com controle de acesso.
 
 ---
 
@@ -31,15 +32,15 @@
 O projeto é estruturado como um **Monorepo** utilizando npm workspaces, garantindo consistência e facilidade no compartilhamento de tipos e configurações.
 
 ### Frontend (`/frontend`)
-- **Framework**: [Next.js 16+](https://nextjs.org/) (App Router)
+- **Framework**: [Next.js 16.x](https://nextjs.org/) (App Router)
 - **UI**: [React 19](https://react.dev/) com TypeScript
-- **Estilização**: Vanilla CSS com Design System (Tokens de cores, tipografia e espaçamento)
-- **Componentes**: Biblioteca customizada e modular
+- **Estilização**: CSS Modules & Vanilla CSS
+- **Componentes**: Biblioteca customizada e modular baseada em Design System
 - **Autenticação**: [Clerk](https://clerk.com/)
 
 ### Backend (`/backend`)
-- **Framework**: [NestJS 11+](https://nestjs.com/)
-- **ORM**: [Prisma](https://www.prisma.io/)
+- **Framework**: [NestJS 11.x](https://nestjs.com/)
+- **ORM**: [Prisma 6.x](https://www.prisma.io/)
 - **Banco de Dados**: PostgreSQL (via Supabase)
 - **Arquitetura**: Modular com foco em isolamento de domínios e multi-tenancy nativo
 - **Testes**: Jest (Unitários, Integração e E2E)
@@ -108,18 +109,17 @@ npm run dev:backend
 devai/
 ├── backend/               # API NestJS
 │   ├── src/
-│   │   ├── core/         # Interceptors, Decorators, Guards Globais
-│   │   ├── database/     # Configuração Prisma e Database Service
-│   │   └── modules/      # Módulos de Domínio (Catalog, etc.)
-│   └── test/             # Testes E2E
+│   │   ├── core/         # Interceptors, Decorators, Guards
+│   │   ├── database/     # Prisma e Seeders
+│   │   └── modules/      # Catalog, Orders, Customers
+│   └── test/             # Testes Automatizados
 ├── frontend/              # App Next.js
 │   ├── src/
 │   │   ├── app/          # App Router (shop, admin, auth)
-│   │   ├── components/   # Componentes Shared/UI
-│   │   └── lib/          # Client API e Utilities
-├── docs/                  # Documentação de Arquitetura e Requisitos
-├── package.json           # Configuração de Monorepo (Workspaces)
-└── README.md
+│   │   ├── components/   # UI Library
+│   │   └── lib/          # API Clients
+├── docs/                  # Documentação Técnica
+└── package.json           # Scripts Globais e Workspaces
 ```
 
 ---
@@ -154,12 +154,13 @@ npm run lint
 
 - [x] Inicialização do Monorepo
 - [x] Estrutura Base de Multi-tenancy
-- [x] Módulo de Catálogo (Produtos e Categorias) no Backend
-- [x] Integração Inicial Frontend-Backend
-- [ ] Implementação de Carrinho e Pedidos
+- [x] Módulo de Catálogo e Produtos
+- [x] Gestão de Clientes e Pedidos (Backend)
+- [x] Integração de Checkout e Carrinho (Frontend)
+- [x] Pipeline de CI/CD via GitHub Actions
+- [x] Deploy Automatizado na Vercel
 - [ ] Dashboards Administrativos Avançados
-- [ ] Notificações via WhatsApp/E-mail
-- [ ] Deploy Automatizado em Produção (AWS/Vercel)
+- [ ] Notificações Push/WhatsApp
 
 ---
 
