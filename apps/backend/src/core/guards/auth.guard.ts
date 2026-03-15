@@ -35,8 +35,7 @@ export class AuthGuard implements CanActivate {
 
     // After token is verified, any further errors (DB connection, etc) should be 500, not 401.
     const userId = decodedToken.sub;
-    const tenantId =
-      request.tenantId || '00000000-0000-0000-0000-000000000000';
+    const tenantId = request.tenantId || '00000000-0000-0000-0000-000000000000';
 
     // Attach the full user info to request (from Clerk API)
     const clerkUser = await this.clerkService.getUser(userId);

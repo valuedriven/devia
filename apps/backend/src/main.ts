@@ -3,12 +3,12 @@ import { join } from 'path';
 
 // In Vercel/Production, environment variables are injected directly into process.env.
 // dotenv is mainly for local development.
-dotenv.config(); 
+dotenv.config();
 // Second attempt with hardcoded path for local dev flexibility
 try {
   dotenv.config({ path: join(process.cwd(), '.env') });
   dotenv.config({ path: join(process.cwd(), '../../.env') });
-} catch (e) {
+} catch {
   // Ignore errors as env might already be set in Vercel
 }
 
