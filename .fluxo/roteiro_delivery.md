@@ -40,6 +40,8 @@ Os comandos executados neste roteiro consideram tanto execuções via terminal q
 
 Certifique-se de estar logado nessses serviços ao realizar o roteiro.
 
+Como complemento, pode ser configurado o fluxo para utilização de ferramentas opensource, disponível [aqui](https://github.com/valuedriven/devai/blob/main/.fluxo/tarefas/setup_opensource.md)
+
 ### Gerenciamento da janela de contexto
 
 - Priorize a criação de novas conversa no Antigravity para cada tarefa. Para tanto, acesse o painel Agent, comando +, Start a New Conversation.
@@ -138,7 +140,7 @@ NEXT_PUBLIC_API_URL=http://localhost:3005/v1
 ```
 Crie o arquivo README.md para o repositório com base na documentação disponível em @docs.
 
-Siga as boas práticas recomendadas pelo GitHub disponíveis em: <https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-readmes>
+Siga as boas práticas recomendadas pelo GitHub disponíveis em <https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-readmes>
 ```
 
 
