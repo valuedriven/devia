@@ -37,8 +37,8 @@ export function UserDropdown({ user, isAdmin, onLogout }: UserDropdownProps) {
 
   return (
     <div className="user-dropdown-container" ref={dropdownRef} data-testid="user-dropdown-container">
-      <button className="btn-icon-size btn-ghost rounded-md" onClick={toggleDropdown} aria-label="Menu do usuário">
-        <User className="icon-md" />
+      <button className="btn-icon-circular btn-ghost" onClick={toggleDropdown} aria-label="Menu do usuário">
+        <User className="icon-sm" />
       </button>
 
       {isOpen && (

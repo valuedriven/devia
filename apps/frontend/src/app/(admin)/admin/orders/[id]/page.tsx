@@ -38,7 +38,7 @@ export default async function AdminOrderDetailsPage({ params }: { params: { id: 
                         <ArrowLeft className="h-4 w-4" />
                     </Button>
                 </Link>
-                <h1 className="text-3xl font-bold">Pedido #{order.number || order.id.slice(0, 8)}</h1>
+                <h1 className="heading-xl">Pedido #{order.number || order.id.slice(0, 8)}</h1>
                 <Badge data-testid="order-status-badge" tone={statusToneMap[order.status] || "neutral"} className="ml-2 text-lg px-3 py-1">
                     {order.status}
                 </Badge>

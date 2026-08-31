@@ -24,7 +24,7 @@ export default function ProfilePage() {
     if (!isLoggedIn) {
         return (
             <div className="container py-12 text-center">
-                <h1 className="text-2xl font-bold mb-4">Acesso Negado</h1>
+                <h1 className="heading-lg mb-4">Acesso Negado</h1>
                 <p className="text-muted-foreground">Você precisa estar logado para ver esta página.</p>
             </div>
         );
@@ -51,7 +51,7 @@ export default function ProfilePage() {
                         </div>
                     )}
                     <div>
-                        <h1 className="text-3xl font-bold tracking-tight">{displayName}</h1>
+                        <h1 className="heading-xl tracking-tight">{displayName}</h1>
                         <p className="text-muted-foreground">Gerencie suas informações de conta</p>
                     </div>
                 </div>

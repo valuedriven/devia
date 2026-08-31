@@ -24,7 +24,7 @@ export default async function EditCustomerPage({ params }: { params: Promise<{ i
                 <Link href="/admin/customers" className={buttonVariants({ variant: "ghost", size: "icon" })}>
                     <ArrowLeft className="h-4 w-4" />
                 </Link>
-                <h1 className="text-3xl font-bold">Editar Cliente</h1>
+                <h1 className="heading-xl">Editar Cliente</h1>
             </div>
 
             <CustomerForm initialData={customer} />

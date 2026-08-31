@@ -17,20 +17,25 @@ export default async function Home({
 
     return (
         <div className="container home-container">
-            {/* Hero Section Placeholder */}
-            <section className="hero-section animate-in">
+            {/* Hero Section — campaign block */}
+            <section className="hero-section">
                 <h1 className="hero-title">Bem-vindo à DevAI Store</h1>
                 <p className="hero-subtitle">
                     Encontre os melhores produtos com a qualidade que você merece.
                 </p>
+                <div className="hero-actions">
+                    <Link href="#vitrine" className="btn btn-on-image btn-default">
+                        Explorar Produtos
+                    </Link>
+                </div>
             </section>
 
-            {/* Categories Navigation */}
+            {/* Categories Navigation — filter chips */}
             <section className="py-2">
                 <div className="flex flex-row items-center gap-2 overflow-x-auto pb-4" style={{ WebkitOverflowScrolling: 'touch' }}>
                     <Link
                         href="/"
-                        className={`btn btn-sm ${!categoryId ? "btn-primary" : "btn-outline"}`}
+                        className={`chip ${!categoryId ? "chip-active" : ""}`}
                     >
                         Todos
                     </Link>
@@ -42,7 +47,7 @@ export default async function Home({
                             <Link
                                 key={cat.id}
                                 href={`/?${params.toString()}`}
-                                className={`btn btn-sm ${categoryId === cat.id ? "btn-primary" : "btn-outline"}`}
+                                className={`chip ${categoryId === cat.id ? "chip-active" : ""}`}
                             >
                                 {cat.name}
                             </Link>
@@ -52,7 +57,7 @@ export default async function Home({
             </section>
 
             {/* Vitrine */}
-            <section>
+            <section id="vitrine">
                 <div className="section-header mb-4">
                     <h2 className="section-title">Destaques</h2>
                 </div>

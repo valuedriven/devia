@@ -23,7 +23,7 @@ export class StorefrontPage {
     this.backToStoreLink = page.getByRole('link', { name: 'Voltar para a loja' }).first();
     this.productCards = page.locator('.products-grid').getByTestId('product-card');
     this.outOfStockBadge = page.getByRole('main').getByText('Esgotado').first();
-    this.price = page.locator('main').locator('.text-4xl.font-bold.text-primary').first();
+    this.price = page.locator('main').locator('.heading-xl').first();
     this.notFoundMessage = page.getByText(/404|not found|não encontrad/i).first();
   }
 

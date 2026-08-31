@@ -131,7 +131,7 @@ export default function OrderDetailsPage({ params }: { params: { id: string } })
 
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                 <div>
-                    <h1 className="text-3xl font-bold">Pedido #{order.id}</h1>
+                    <h1 className="heading-xl">Pedido #{order.id}</h1>
                     <p className="text-muted-foreground">Realizado em {new Date(order.date || "").toLocaleString()}</p>
                 </div>
                 <div className="flex items-center gap-4">

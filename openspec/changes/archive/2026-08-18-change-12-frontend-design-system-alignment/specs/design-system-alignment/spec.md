@@ -1,9 +1,4 @@
-# Capability: Design System Alignment
-
-## Purpose
-This capability covers the implementation of the core brand design system in the frontend, defining styling rules and constants derived from docs/design.md.
-
-## Requirements
+## MODIFIED Requirements
 
 ### Requirement: Color Palette Compliance
 The frontend implementation SHALL restrict colors strictly to the palette defined in docs/design.md. The primary colors include Nike Black (#111111) for primary text and CTAs, Pure White (#ffffff) for canvas, and Soft Cloud (#f5f5f5) for product backgrounds and secondary CTAs. Semantic colors (Sale #d30005, Success #007d48, Info #1151ff) SHALL be used only where documented: Sale exclusively as text/price signal, never as a background or badge fill; Success for confirmation/in-stock indicators; Info for informational accents. No hardcoded hex values outside the palette SHALL appear in frontend styles; category accent colors (accent-pink, accent-purple-*, accent-teal, accent-pink-deep) SHALL NOT be used in primary chrome.
@@ -76,6 +71,8 @@ The design system CSS tokens (`globals.css`) SHALL use a consistent token system
 #### Scenario: Component rules use tokens
 - **WHEN** a component rule in globals.css specifies radius, spacing, or typography size
 - **THEN** it MUST reference the corresponding token variable instead of a raw value
+
+## ADDED Requirements
 
 ### Requirement: No Drop Shadows or Elevation
 The frontend SHALL NOT use drop shadows or card elevation anywhere in the retail chrome. Cards, buttons, sections, and menus sit flat on the page. The only permitted depth cue is the 1px inset hairline-soft bottom line on sticky bars/tab strips (`box-shadow: inset 0 -1px 0 #e5e5e5`) and 1px hairline dividers. Glassmorphism (backdrop-filter blur on chrome surfaces) SHALL NOT be used.

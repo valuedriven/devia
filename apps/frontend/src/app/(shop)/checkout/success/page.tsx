@@ -14,7 +14,7 @@ function SuccessContent() {
     return (
         <div className="order-success-container" data-testid="order-success-container">
             <CheckCircle className="order-success-icon text-success h-16 w-16 mx-auto mb-4" />
-            <h1 className="order-success-title text-3xl font-bold text-center" data-testid="order-success-title">
+            <h1 className="order-success-title text-center" data-testid="order-success-title">
                 Pedido Confirmado!
             </h1>
             {orderId && (

@@ -40,7 +40,7 @@ export default function CheckoutPage() {
         return (
             <div className="container py-8 text-center space-y-4">
                 <ShoppingBag className="mx-auto h-16 w-16 text-muted-foreground" />
-                <h1 className="text-2xl font-bold">Seu carrinho está vazio</h1>
+                <h1 className="heading-lg">Seu carrinho está vazio</h1>
                 <p className="text-muted-foreground">Adicione produtos antes de prosseguir para o checkout.</p>
                 <Link href="/">
                     <Button>Voltar para a loja</Button>
@@ -129,7 +129,7 @@ export default function CheckoutPage() {
                 </Link>
             </div>
 
-            <h1 className="text-3xl font-bold">Finalizar Compra</h1>
+            <h1 className="heading-xl">Finalizar Compra</h1>
 
             <form onSubmit={handleSubmitOrder} className="grid gap-8 md:grid-cols-3 md:items-start">
                 <div className="md:col-span-2 space-y-6">

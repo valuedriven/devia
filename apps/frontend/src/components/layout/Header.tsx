@@ -49,10 +49,10 @@ export function Header() {
                 <div className="header-brand">
                     {/* Mobile Menu Trigger - Visible only on mobile */}
                     <button
-                        className="menu-trigger-btn hidden-desktop"
+                        className="btn-icon-circular btn-ghost hidden-desktop"
                         onClick={() => setIsMenuOpen(true)}
                     >
-                        <Menu className="icon-md" />
+                        <Menu className="icon-sm" />
                         <span className="sr-only">Menu</span>
                     </button>
                     {/* DevAI label removed as per request */}
@@ -75,15 +75,15 @@ export function Header() {
 
                 {/* Actions */}
                 <div className="header-actions">
-                    <Link href="/cart" className="btn-icon-size btn-ghost rounded-md cart-icon-wrapper" data-testid="cart-icon-wrapper">
-                        <ShoppingCart className="icon-md" />
+                    <Link href="/cart" className="btn-icon-circular btn-ghost cart-icon-wrapper" data-testid="cart-icon-wrapper">
+                        <ShoppingCart className="icon-sm" />
                         {itemCount > 0 && <span className="cart-badge" data-testid="cart-badge">{itemCount}</span>}
                         <span className="sr-only">Carrinho</span>
                     </Link>
                     
                     {!isLoggedIn ? (
-                        <Link href="/login" className="btn-icon-size btn-ghost rounded-md">
-                            <User className="icon-md" />
+                        <Link href="/login" className="btn-icon-circular btn-ghost">
+                            <User className="icon-sm" />
                             <span className="sr-only">Login</span>
                         </Link>
                     ) : (

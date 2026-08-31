@@ -74,7 +74,7 @@ export default async function AdminOrdersPage({
     return (
         <div className="space-y-6">
             <div className="flex justify-between items-center">
-                <h1 className="text-3xl font-bold">Pedidos</h1>
+                <h1 className="heading-xl">Pedidos</h1>
             </div>
 
             <div className="flex flex-wrap gap-4 items-end bg-white p-4 rounded-lg border border-slate-200 shadow-sm">

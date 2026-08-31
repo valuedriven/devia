@@ -55,7 +55,7 @@ export function PaymentRegistrationModal({ orderId }: { orderId: string }) {
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
             <div className="bg-white rounded-lg shadow-xl w-full max-w-md overflow-hidden animate-in fade-in zoom-in duration-200">
                 <div className="p-6 border-b flex justify-between items-center">
-                    <h3 className="text-xl font-bold">Registrar Pagamento</h3>
+                    <h3 className="heading-lg">Registrar Pagamento</h3>
                     <button onClick={() => setIsOpen(false)} className="text-slate-400 hover:text-slate-600">✕</button>
                 </div>
                 <form onSubmit={handleSubmit} className="p-6 space-y-4 text-slate-900">

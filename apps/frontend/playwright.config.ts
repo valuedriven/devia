@@ -69,7 +69,8 @@ export default defineConfig({
         /customer-management\.spec\.ts/,
         /product-management\.spec\.ts/,
         /order-management\.spec\.ts/,
-        /order-lifecycle\.spec\.ts/
+        /order-lifecycle\.spec\.ts/,
+        /design-system-alignment-admin\.spec\.ts/
       ],
     },
     {

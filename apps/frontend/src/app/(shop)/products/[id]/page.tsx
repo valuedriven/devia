@@ -46,7 +46,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
                 {/* Product Info */}
                 <div className="space-y-6">
                     <div>
-                        <h1 className="text-3xl font-bold">{product.name}</h1>
+                        <h1 className="heading-xl">{product.name}</h1>
                         <div className="mt-2 flex items-center gap-4">
                             <Badge tone={product.stock > 0 ? "success" : "error"}>
                                 {product.stock > 0 ? "Em Estoque" : "Esgotado"}
@@ -57,7 +57,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
                         </div>
                     </div>
 
-                    <div className="text-4xl font-bold text-primary">
+                    <div className="heading-xl">
                         {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(product.price)}
                     </div>
 

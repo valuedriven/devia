@@ -10,7 +10,7 @@ export interface ButtonProps
 }
 
 export const buttonVariants = ({ variant = "primary", size = "default", className }: { variant?: ButtonProps["variant"], size?: ButtonProps["size"], className?: string } = {}) => {
-    // semantic classes mapping
+    // semantic classes mapping (docs/design.md component vocabulary)
     const baseStyles = "btn";
 
     const variants = {
@@ -26,7 +26,7 @@ export const buttonVariants = ({ variant = "primary", size = "default", classNam
         default: "btn-default",
         sm: "btn-sm",
         lg: "btn-lg",
-        icon: "btn-icon-size",
+        icon: "btn-icon-circular",
     };
 
     return cn(baseStyles, variants[variant || "primary"], sizes[size || "default"], className);

@@ -17,7 +17,7 @@ export default function CartPage() {
 
     return (
         <div className="container py-8">
-            <h1 className="text-3xl font-bold mb-8">Carrinho de Compras</h1>
+            <h1 className="heading-xl mb-8">Carrinho de Compras</h1>
 
             <div className="grid gap-8 md:grid-cols-3 md:items-start">
                 {/* Cart Items List */}

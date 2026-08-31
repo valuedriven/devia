@@ -33,7 +33,7 @@ export default async function EditProductPage({ params }: EditProductPageProps) 
                 <Link href="/admin/products" className={buttonVariants({ variant: "ghost", size: "icon" })}>
                     <ArrowLeft className="h-4 w-4" />
                 </Link>
-                <h1 className="text-3xl font-bold">Editar Produto</h1>
+                <h1 className="heading-xl">Editar Produto</h1>
             </div>
 
             <ProductForm categories={categories} initialData={product} />

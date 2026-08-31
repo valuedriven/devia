@@ -10,13 +10,15 @@ When instructions conflict, apply them in the following order:
 4. Simplicity
 5. Developer Experience
 
+Conflicts are resolved by the highest applicable rule; between rules of equal rank, the most specific one wins. Skill files are task-specific procedures: they do not override this file unless they carry a higher-priority rule explicitly.
+
 ---
 
 # Purpose
 
 This document contains the permanent operating rules that apply to nearly every development task in this repository.
 
-Task-specific procedures (testing, Playwright, Docker, Prisma, infrastructure, etc.) must be loaded from dedicated skill files only when required.
+Task-specific procedures (testing, Playwright, Docker, Prisma, OpenSpec, infrastructure, etc.) are owned by dedicated skill files and must be loaded when required.
 
 ---
 
@@ -82,9 +84,11 @@ Whenever practical:
 
 Technology
 
-- Next.js (App Router)
+- Next.js 16 (App Router)
+- React 19
 - TypeScript
 - Vanilla CSS
+- Clerk for authentication state
 
 Responsibilities
 
@@ -107,9 +111,10 @@ The frontend is a presentation layer only.
 
 Technology
 
-- NestJS
-- Prisma
-- PostgreSQL
+- NestJS 11
+- Prisma 7
+- PostgreSQL 15
+- Clerk JWT verification (RBAC: ADMIN / CUSTOMER)
 
 Responsibilities
 
@@ -143,13 +148,17 @@ The application must remain portable across local Docker environments and manage
 
 ```text
 apps/
-    frontend/
-    backend/
-
-docs/
+    frontend/   Next.js 16 (App Router)
+    backend/    NestJS 11 (Prisma, PostgreSQL)
+docs/           problem.md, prd.md, spec.md, architecture.md, design.md
+openspec/       Spec-Driven changes and delta specs
+.fluxo/         Discovery/Delivery methodology manuals
+.agents/        Skills and workflows for AI coding agents
+infra/          Infrastructure as code
+.github/        CI/CD workflows
 ```
 
-Follow existing project conventions before introducing new structures.
+This is an npm workspaces monorepo (`workspaces: apps/*`). Follow existing project conventions before introducing new structures.
 
 ---
 
@@ -171,13 +180,15 @@ Describe:
 - implementation strategy
 - validation approach
 
+Feature work follows Spec-Driven Development: propose changes through OpenSpec (`openspec-propose`), implement (`openspec-apply-change`), verify (`openspec-verify-change`), then archive.
+
 ## Implementation
 
 Make the smallest change that satisfies the requirement.
 
 ## Validation
 
-Run only the validation steps applicable to the modified code.
+Run only the validation steps applicable to the modified code (see Quality Standards).
 
 ## Report
 
@@ -198,9 +209,11 @@ Commands should be:
 - deterministic
 - non-interactive
 
-Prefer explicit working directories instead of chained `cd` commands.
+Prefer explicit working directories (`--workspace`, `workdir`) instead of chained `cd` commands.
 
-Avoid starting long-running processes unless explicitly requested.
+Run validation commands non-interactively: pin E2E runs with `--workers=1`, start infrastructure with `docker compose up -d db`, and avoid prompts that block execution.
+
+Never start long-running processes (dev servers, watch modes) unless explicitly requested.
 
 ---
 
@@ -210,13 +223,25 @@ A task is complete only when:
 
 - requirements are satisfied
 - relevant automated validation succeeds
+- the `quality-gate` skill has been executed (mandatory)
 - no known regression has been introduced
 
-Whenever applicable:
+Canonical validation commands — run only the ones applicable to the change:
 
-- update automated tests
-- execute the project's validation commands
-- resolve validation failures before completion
+| Command | Scope |
+|---------|-------|
+| `npm run lint` | ESLint (runs with `--fix`; keep fixes scoped) |
+| `npm run build` | Build frontend and backend |
+| `npm run test:unit` | Backend Jest unit tests with coverage |
+| `npm run test:integration` | Backend Supertest integration tests (real PostgreSQL) |
+| `npm run test:e2e` | Frontend Playwright E2E (resets DB, `--workers=1`) |
+| `npm run test:all` | The complete test pipeline |
+
+Stryker mutation testing and SonarQube analysis exist as deeper quality gates; use them when backend logic or overall code quality is in scope.
+
+CI (GitHub Actions) runs these pipelines, including Playwright E2E — validate locally with the same commands before pushing.
+
+Resolve all validation failures before completion. Whenever applicable, update automated tests.
 
 ---
 
@@ -224,14 +249,14 @@ Whenever applicable:
 
 Before implementing significant changes, consult the relevant project documentation.
 
-Typical references include:
-
-| Document | Purpose |
-|-----------|---------|
-| Product Requirements | Business behavior |
-| Technical Specification | Architecture and implementation decisions |
-| UI Specification | Interface behavior |
-| Design System | Visual consistency |
+| Document | Path | Purpose |
+|-----------|------|---------|
+| Problem Definition | `docs/problem.md` | Business problem and scope |
+| Product Requirements | `docs/prd.md` | Business behavior |
+| Technical Specification | `docs/spec.md` | Architecture and implementation decisions |
+| Architecture | `docs/architecture.md` | Structural decisions |
+| UI Specification / Design System | `docs/design.md` | Interface behavior and visual consistency |
+| OpenSpec specs | `openspec/specs/` | Delta specs governing implemented behavior |
 
 Project documentation always takes precedence over assumptions.
 
@@ -260,25 +285,42 @@ The configuration should evolve together with the project.
 
 # Skill Loading
 
-Load specialized skills only when required by the current task.
+Load a skill as soon as the current task matches its trigger — before taking task actions, not after. When several apply, load all applicable skills and follow their instructions.
+
+The `quality-gate` skill is mandatory before declaring any task complete.
 
 Examples:
 
 | Skill | When to Load |
 |--------|--------------|
-| backend-testing | Implementing backend tests |
-| playwright-testing | Writing or modifying E2E tests |
-| docker | Container or infrastructure work |
-| prisma | Database schema or migration changes |
-| environment | Environment configuration |
-| architecture | Large architectural modifications |
+| quality-gate | Before finishing any task (mandatory) |
+| jest-unit-tests | Backend unit tests |
+| supertest-integration-tests | Backend integration tests |
+| playwright-e2e-tests | Frontend E2E tests |
+| openspec-propose / apply-change / verify-change | OpenSpec-driven feature work |
+| nestjs-best-practices | NestJS code |
+| next-best-practices | Next.js code |
+| clerk-* | Authentication-related work |
+| supabase-postgres-best-practices | PostgreSQL work |
+| shadcn-ui / stitch-loop | UI component work |
+| deploy | Deployment to AWS |
+| code-review / frontend-code-review | Reviewing code |
 
 ---
 
 # Environment
 
-This repository uses a single `.env` file located at the project root.
+Configuration is centralized in a single `.env` file at the repository root; the backend loads it explicitly (dotenv + ConfigModule).
 
-Frontend and backend must load configuration from this shared file.
+- Never commit `.env` or `.env.local` (both are gitignored).
+- Keep `.env.example` in sync whenever variables are added or changed.
+- The frontend must not define its own source of truth for configuration; `NEXT_PUBLIC_*` values are read from the shared file. A local `apps/frontend/.env.local` is permitted only for machine-local overrides.
+- Do not create module-specific `.env` files unless the project architecture explicitly changes.
 
-Do not create module-specific `.env` files unless the project architecture explicitly changes.
+---
+
+# Scope of This File
+
+AGENTS.md owns permanent, cross-cutting rules for every development task. Task-specific procedures (testing, Playwright, Docker, Prisma, OpenSpec, deployment) live in skill files and must be loaded when required.
+
+Propose changes to this file through review as the project evolves (see Continuous Improvement). Do not silently expand it with one-off project-specific procedures.

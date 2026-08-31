@@ -79,7 +79,7 @@ export default function OrdersPage() {
 
     return (
         <div className="container py-8 space-y-6">
-            <h1 className="text-3xl font-bold">Meus Pedidos</h1>
+            <h1 className="heading-xl">Meus Pedidos</h1>
 
             {/* Status Filter Buttons */}
             <div className="flex flex-wrap gap-2 pb-2 border-b">

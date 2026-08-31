@@ -20,7 +20,7 @@ export default async function AdminCategoriesPage({ searchParams }: { searchPara
     return (
         <div className="space-y-6">
             <div className="flex justify-between items-center">
-                <h1 className="text-3xl font-bold">Categorias</h1>
+                <h1 className="heading-xl">Categorias</h1>
             </div>
 
             <AdminSearchBar placeholder="Pesquisar categorias..." />

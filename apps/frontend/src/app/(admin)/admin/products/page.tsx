@@ -93,7 +93,7 @@ export default async function AdminProductsPage({ searchParams }: { searchParams
     return (
         <div className="space-y-6">
             <div className="flex justify-between items-center">
-                <h1 className="text-3xl font-bold">Produtos</h1>
+                <h1 className="heading-xl">Produtos</h1>
                 <Link href="/admin/products/new" className={buttonVariants()}>
                     <Plus className="mr-2 h-4 w-4" />
                     Novo Produto

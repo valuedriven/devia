@@ -30,7 +30,7 @@ export default async function AdminDashboard() {
                         <DollarSign className="h-4 w-4 text-muted-foreground" />
                     </CardHeader>
                     <CardContent>
-                        <div className="text-2xl font-bold">
+                        <div className="heading-lg">
                             {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(totalSales)}
                         </div>
                     </CardContent>
@@ -41,7 +41,7 @@ export default async function AdminDashboard() {
                         <ShoppingBag className="h-4 w-4 text-muted-foreground" />
                     </CardHeader>
                     <CardContent>
-                        <div className="text-2xl font-bold">{orders.length}</div>
+                        <div className="heading-lg">{orders.length}</div>
                     </CardContent>
                 </Card>
                 <Card>
@@ -50,7 +50,7 @@ export default async function AdminDashboard() {
                         <Clock className="h-4 w-4 text-muted-foreground" />
                     </CardHeader>
                     <CardContent>
-                        <div className="text-2xl font-bold">
+                        <div className="heading-lg">
                             {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(totalPending)}
                         </div>
                     </CardContent>

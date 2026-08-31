@@ -30,8 +30,8 @@ export function MobileMenu({ isOpen, onClose, isAdmin }: MobileMenuProps) {
             <div className={`mobile-menu-content ${isOpen ? "open" : ""}`}>
                 <div className="mobile-menu-header">
                     <span className="mobile-menu-title">Menu</span>
-                    <button onClick={onClose} className="btn-icon-size btn-ghost rounded-md">
-                        <X className="icon-md" />
+                    <button onClick={onClose} className="btn-icon-circular btn-ghost">
+                        <X className="icon-sm" />
                     </button>
                 </div>
 

@@ -73,7 +73,7 @@ export default async function AdminCustomersPage({ searchParams }: { searchParam
     return (
         <div className="space-y-6">
             <div className="flex justify-between items-center">
-                <h1 className="text-3xl font-bold">Clientes</h1>
+                <h1 className="heading-xl">Clientes</h1>
                 <Link href="/admin/customers/new" className={buttonVariants()}>
                     <Plus className="mr-2 h-4 w-4" />
                     Novo Cliente
