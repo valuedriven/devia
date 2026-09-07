@@ -1,6 +1,6 @@
 # Roadmap de Implementação Incremental — DevAI
 
-Plano de entregas dividido em 11 mudanças com tamanho, complexidade e risco controlados (todos Baixo ou Médio).
+Plano de entregas dividido em 12 mudanças com tamanho, complexidade e risco controlados (todos Baixo ou Médio).
 
 ## Estrutura de Dependências
 
@@ -19,6 +19,7 @@ graph TD
     08 ---> 10[10 Dashboard Base]
     09 ---> 10
     10 ---> 11[11 Dashboard Filter]
+    03 ---> 12[12 Flexible RBAC]
 ```
 
 ## Resumo do Planejamento
@@ -36,6 +37,7 @@ graph TD
 | 09 | Order Management | Status + pagamentos + auditoria (admin) | M | 08 | 6 | 6 | 4 |
 | 10 | Dashboard Base | KPIs: total, recebido, pendente | P | 08, 09 | 3 | 2 | 2 |
 | 11 | Dashboard Filter | Filtro por período | P | 10 | 3 | 3 | 3 |
+| 12 | Flexible RBAC | User/Role/Permission entities + admin CRUD + permission-driven UI | G | 03 | 10 | 10 | 5 |
 
 **Legenda**: Tam. = Tamanho (P=pequeno, M=médio). Testes U = testes unitários. Testes I = testes de integração.
 
@@ -64,6 +66,9 @@ Fase 5 — Pedidos
 Fase 6 — Métricas
   ├─ 10 Dashboard Base (após 08, 09)
   └─ 11 Dashboard Filter (após 10)
+
+Fase 7 — RBAC
+  └─ 12 Flexible RBAC (após 03)
 ```
 
 ## Critérios de Qualidade (todas as mudanças)

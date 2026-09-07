@@ -7,7 +7,7 @@
   "license": "UNLICENSED",
   "scripts": {
     "prisma:generate": "prisma generate --schema src/database/prisma/schema.prisma",
-    "db:reset": "prisma db push --force-reset --schema src/database/prisma/schema.prisma && ts-node src/database/prisma/seed.ts",
+    "db:reset": "prisma migrate reset --force && prisma db seed",
     "db:clean": "ts-node src/database/prisma/clean.ts",
     "build": "npm run prisma:generate && nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
@@ -116,8 +116,5 @@
       }
     },
     "testEnvironment": "node"
-  },
-  "prisma": {
-    "seed": "ts-node src/database/prisma/seed.ts"
   }
 }
